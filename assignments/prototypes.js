@@ -24,6 +24,7 @@ this.dimensions=attributes.dimensions;
 GameObject.prototype.destroy=function(){
   return `${this.name} was removed from the game.`;
 }
+
 /*
   === CharacterStats ===
   * healthPoints
@@ -63,6 +64,31 @@ CharacterStats.prototype=Object.create(GameObject.prototype);
 
  Humanoid.prototype.greet=function(){
   return `${this.name} offers a greeting in ${this.language}.`;
+}
+
+//stretch
+
+function Hero(HeroAttributes){
+  this.location=HeroAttributes.location;
+  this.superPower=HeroAttributes.superPower;
+}
+
+Hero.prototype=Object.create(Humanoid.prototype);
+
+Hero.prototype.rides=function(){
+  return `${this.name} rides from ${this.location}`
+}
+
+function Villan(VillanAttributes){
+this.lair=VillanAttributes.lair;
+this.evilPower=VillanAttributes.evilPower;
+}
+
+Villan.prototype=Object.create(Humanoid.prototype);
+
+
+Villan.prototype.hides=function(){
+  return `${this.name} plots his evil deeds from ${this.lair} and performs his ${this.evilPower}`
 }
 /*
   * Inheritance chain: GameObject -> CharacterStats -> Humanoid
@@ -122,6 +148,44 @@ CharacterStats.prototype=Object.create(GameObject.prototype);
     ],
     language: 'Elvish',
   });
+  const ourHero = new Humanoid({
+    createdAt: new Date(),
+    dimensions: {
+      length: 2,
+      width: 2,
+      height: 3,
+    },
+    healthPoints: 11,
+    name: 'Ned Stark',
+    team: 'Winterfell',
+    weapons: [
+      'Sword of Winterfell',
+    ],
+    language: 'English',
+    location:"The North",
+    superPower:"Sword freeze"
+  });
+  const ourVillan = new Humanoid({
+    createdAt: new Date(),
+    dimensions: {
+      length: 4,
+      width: 3,
+      height: 4,
+    },
+    healthPoints: 10,
+    name: 'Sauron',
+    team: 'Evil',
+    weapons: [
+      'The all seeing eye',
+    ],
+    language: 'an evil language',
+    lair:"Mordor",
+    evilPower:"Making a ring"
+  });
+
+
+
+
 
   console.log(mage.createdAt); // Today's date
   console.log(archer.dimensions); // { length: 1, width: 2, height: 4 }
@@ -133,7 +197,8 @@ CharacterStats.prototype=Object.create(GameObject.prototype);
   console.log(archer.greet()); // Lilith offers a greeting in Elvish.
   console.log(mage.takeDamage()); // Bruce took damage.
   console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
-
+  console.log(ourHero.name);
+  console.log(ourVillan.weapons)
 
   // Stretch task: 
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.  
